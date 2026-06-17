@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Dispatch Hub logo">
+  <rect x="6" y="20" width="38" height="22" rx="4" fill="#2b59ff"/>
+  <rect x="40" y="26" width="16" height="16" rx="3" fill="#1c3fc4"/>
+  <circle cx="18" cy="46" r="6" fill="#16202a"/>
+  <circle cx="46" cy="46" r="6" fill="#16202a"/>
+  <circle cx="18" cy="46" r="2.5" fill="#fff"/>
+  <circle cx="46" cy="46" r="2.5" fill="#fff"/>
+  <circle cx="52" cy="16" r="6" fill="#1f9d55"/>
+  <circle cx="52" cy="16" r="2.5" fill="#fff"/>
+</svg>
