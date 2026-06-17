@@ -1,35 +1,423 @@
-/* ===== custom properties ===== */
+/* =========================================================
+   Dispatch Hub — style.css
+   ერთიანი დასახელების კონვენცია: BEM-ისებური
+   block, block__element, block--modifier
+   ========================================================= */
+
+/* ---- 1. CSS Custom Properties (ცვლადები) ---------------- */
 :root {
-  /* ფერების პალიტრა და დაშორებების ცვლადები */
+  /* ფერები */
+  --color-ink: #16202a;        /* ძირითადი ტექსტი */
+  --color-muted: #5b6770;      /* მეორეხარისხოვანი ტექსტი */
+  --color-paper: #eef1f4;      /* ფონი */
+  --color-surface: #ffffff;    /* ბარათების ფონი */
+  --color-line: #d3d9df;       /* ხაზები/ბორდერები */
+  --color-accent: #2b59ff;     /* სასიგნალო ლურჯი */
+  --color-accent-ink: #1c3fc4;
+
+  /* სტატუსის ფერები (დისპეჩერის ფარები) */
+  --status-available: #1f9d55;
+  --status-trip: #d98300;
+  --status-maintenance: #6b7480;
+  --color-danger: #d64545;
+
+  /* დაშორებები */
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+
+  /* ტიპოგრაფია */
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* სხვა */
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(22, 32, 42, 0.08), 0 6px 18px rgba(22, 32, 42, 0.06);
 }
 
-/* ===== reset ===== */
+/* ---- 2. Base ------------------------------------------- */
+* { box-sizing: border-box; }
 
-/* ===== header ===== */
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  line-height: 1.5;
+}
 
-/* ===== nav — Flexbox აქ გამოიყენე ===== */
+h1, h2, h3 { margin: 0 0 var(--space-sm); line-height: 1.2; }
+a { color: var(--color-accent-ink); }
 
-/* ===== login გვერდი ===== */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
 
-/* ===== main ===== */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
 
-/* ===== form ===== */
+/* ---- 3. ღილაკები --------------------------------------- */
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: transform .05s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover { border-color: var(--color-accent); }
+.btn:active { transform: translateY(1px); }
+.btn--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+.btn--primary:hover { background: var(--color-accent-ink); border-color: var(--color-accent-ink); }
+.btn--danger {
+  background: var(--color-surface);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+.btn--danger:hover { background: var(--color-danger); color: #fff; }
+.btn--small { padding: 6px 10px; font-size: .85rem; }
 
-/* ===== results grid — CSS Grid აქ გამოიყენე ===== */
+/* ---- 4. ზედა ზოლი (Flexbox) ---------------------------- */
+.topbar {
+  display: flex;                 /* FLEXBOX #1 */
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-ink);
+  color: #fff;
+}
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.topbar__brand img { width: 26px; height: 26px; }
+.topbar__spacer { margin-left: auto; }   /* flex-ით მარჯვნივ წაიწევს */
+.topbar__user { font-size: .9rem; color: #c8d0d8; }
+.topbar__nav { display: flex; gap: var(--space-sm); }
+.topbar__nav a {
+  color: #c8d0d8;
+  text-decoration: none;
+  font-size: .9rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.topbar__nav a:hover { background: rgba(255,255,255,.1); color: #fff; }
 
-/* ===== card ===== */
+/* როლის ნიშანი */
+.role-badge {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.role-badge--admin { color: #ffd166; }
+.role-badge--dispatcher { color: #8ecae6; }
 
-/* ===== saved grid — CSS Grid აქ გამოიყენე ===== */
+/* ---- 5. გვერდის კარკასი -------------------------------- */
+.page { max-width: 1100px; margin: 0 auto; padding: var(--space-lg) var(--space-md); }
+.page__title { display: flex; align-items: baseline; gap: var(--space-sm); flex-wrap: wrap; }
+.page__title span { color: var(--color-muted); font-size: .95rem; }
 
-/* ===== ჩატვირთვის და შეცდომის მდგომარეობები ===== */
+/* ---- 6. სტატისტიკის ზოლი (Grid) ------------------------ */
+.stats {
+  display: grid;                                          /* GRID #1 */
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+.stat {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+}
+.stat__num { font-family: var(--font-mono); font-size: 1.8rem; font-weight: 700; }
+.stat__label { color: var(--color-muted); font-size: .85rem; }
+.stat--available .stat__num { color: var(--status-available); }
+.stat--trip .stat__num { color: var(--status-trip); }
+.stat--maintenance .stat__num { color: var(--status-maintenance); }
 
-/* ===== footer ===== */
+/* ---- 7. ხელსაწყოების ზოლი ------------------------------ */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+.toolbar__search { flex: 1; min-width: 200px; }
+.field {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  width: 100%;
+}
+.field:focus { border-color: var(--color-accent); outline: none; }
 
-/* ===== რესპონსიული ===== */
+/* ---- 8. მანქანების გრიდი (Grid) ------------------------ */
+.fleet {
+  display: grid;                                          /* GRID #2 */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-md);
+  display: flex;                 /* FLEXBOX #2 */
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.card__head { display: flex; align-items: center; gap: var(--space-sm); }
+.card__title { font-size: 1.05rem; }
+.card__plate {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  padding: 2px 8px;
+  letter-spacing: 1px;
+}
+.card__meta { color: var(--color-muted); font-size: .88rem; margin: 0; }
+.card__foot { display: flex; gap: var(--space-sm); margin-top: auto; }
+
+/* სტატუსის ფარი — signature ელემენტი */
+.status-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot--available { background: var(--status-available); box-shadow: 0 0 0 4px rgba(31,157,85,.18); }
+.status-dot--trip { background: var(--status-trip); box-shadow: 0 0 0 4px rgba(217,131,0,.18); }
+.status-dot--maintenance { background: var(--status-maintenance); box-shadow: 0 0 0 4px rgba(107,116,128,.18); }
+.status-text { margin-left: auto; font-size: .8rem; color: var(--color-muted); }
+
+/* ---- 9. ფორმის პანელი ---------------------------------- */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.form-grid {
+  display: grid;                                          /* Grid ფორმისთვის */
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm) var(--space-md);
+}
+.form-row { display: flex; flex-direction: column; gap: 4px; }
+.form-row--full { grid-column: 1 / -1; }
+.form-row label { font-size: .85rem; font-weight: 600; }
+.radio-group { display: flex; gap: var(--space-md); }
+.radio-group label { font-weight: 400; display: flex; align-items: center; gap: 4px; }
+.form-error { color: var(--color-danger); font-size: .8rem; min-height: 1em; }
+
+/* ---- 10. მდგომარეობების შეტყობინებები ------------------ */
+.loader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-muted);
+  font-size: .9rem;
+}
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid var(--color-line);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+
+.banner {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: .9rem;
+  margin-bottom: var(--space-md);
+}
+.banner--error { background: #fdecec; color: var(--color-danger); border: 1px solid #f3c2c2; }
+.banner--info { background: #eef3ff; color: var(--color-accent-ink); border: 1px solid #c9d6ff; }
+
+.empty {
+  text-align: center;
+  color: var(--color-muted);
+  padding: var(--space-lg);
+}
+.empty img { width: 80px; opacity: .6; margin-bottom: var(--space-sm); }
+
+/* toast */
+.toast {
+  position: fixed;
+  bottom: 20px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-ink);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: .9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+}
+.toast--show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- 11. Login გვერდი ---------------------------------- */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;                 /* Flexbox ცენტრირებისთვის */
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+.login-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-lg);
+  width: 100%;
+  max-width: 380px;
+}
+.login-card__brand {
+  display: flex; align-items: center; gap: var(--space-xs);
+  font-family: var(--font-mono); font-weight: 700; letter-spacing: 1px;
+  margin-bottom: var(--space-md);
+}
+.login-card__brand img { width: 30px; height: 30px; }
+.login-hint {
+  margin-top: var(--space-md);
+  font-size: .8rem;
+  color: var(--color-muted);
+  background: var(--color-paper);
+  border-radius: 8px;
+  padding: var(--space-sm);
+}
+.login-hint code { font-family: var(--font-mono); color: var(--color-ink); }
+
+.checkbox-row { display: flex; align-items: center; gap: var(--space-xs); margin: var(--space-sm) 0; }
+
+/* ---- 12. footer ---------------------------------------- */
+.footer {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: .8rem;
+  padding: var(--space-lg);
+}
+
+/* ---- 12b. Utility კლასები (inline style-ის ნაცვლად) ---- */
+.btn--block { width: 100%; }
+.field--narrow { max-width: 200px; }
+.stack { margin-top: var(--space-md); }
+.form-row--narrow { max-width: 260px; }
+
+/* ---- 12c. ორდერის სპეციფიკური სტილები ------------------ */
+
+/* სტატუსის ფარის ფერები ორდერებისთვის */
+.status-dot--taken { background: var(--status-trip); box-shadow: 0 0 0 4px rgba(217,131,0,.18); }
+.status-dot--delivered { background: var(--status-maintenance); box-shadow: 0 0 0 4px rgba(107,116,128,.18); }
+
+/* ფასი ბარათზე */
+.card__rate {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--status-available);
+}
+.detail-rate {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--status-available);
+}
+
+/* readonly output (მანძილი) */
+.field--readonly {
+  background: var(--color-paper);
+  color: var(--color-muted);
+  display: block;
+}
+
+/* ღილაკი ფორმის რიგის ბოლოში */
+.form-row--end { justify-content: flex-end; }
+
+/* ტვირთის "builder" fieldset */
+.load-builder {
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+}
+.load-builder legend { font-weight: 600; font-size: .9rem; padding: 0 6px; }
+
+/* მანქანების სია (chip-ები) */
+.load-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-sm) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+.vehicle-chip {
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+/* დეტალის ბადე label/value (Grid) */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-md);
+}
+.detail-grid > div { display: flex; flex-direction: column; gap: 2px; }
+.detail-label { color: var(--color-muted); font-size: .8rem; }
+
+/* =========================================================
+   13. რესპონსიულობა — 2 breakpoint
+   ========================================================= */
+
+/* მობილური ≤ 600px */
 @media (max-width: 600px) {
-  /* მობილური */
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .form-grid { grid-template-columns: 1fr; }
+  .topbar { flex-wrap: wrap; gap: var(--space-sm); }
+  .topbar__nav { width: 100%; }
+  .page { padding: var(--space-md) var(--space-sm); }
 }
 
+/* დესქტოპი ≥ 1024px */
 @media (min-width: 1024px) {
-  /* დესქტოპი */
+  .fleet { grid-template-columns: repeat(3, 1fr); }
+  .page { padding: var(--space-lg); }
 }
