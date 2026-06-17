@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatch Hub — ორდერი</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="order">
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <img src="assets/logo.svg" alt="Dispatch Hub-ის ლოგო">
+      <span>DISPATCH&nbsp;HUB</span>
+    </div>
+    <nav class="topbar__nav" aria-label="მთავარი ნავიგაცია">
+      <a href="dashboard.html">← ორდერები</a>
+      <a href="my-orders.html">ჩემი ორდერები</a>
+    </nav>
+    <div class="topbar__spacer"></div>
+    <span class="topbar__user">
+      <span id="user-name">—</span>
+      <span class="role-badge" id="role-badge">—</span>
+    </span>
+    <button class="btn btn--small" id="logout" type="button">გასვლა</button>
+  </header>
+
+  <main class="page" id="detail">
+    <article class="panel">
+      <div class="page__title">
+        <span class="status-dot" id="detail-dot"></span>
+        <h1 id="detail-route">—</h1>
+        <span class="detail-rate" id="detail-rate">—</span>
+      </div>
+
+      <section class="stack" aria-label="ორდერის დეტალები">
+        <div class="detail-grid">
+          <div><span class="detail-label">მანძილი</span><strong id="detail-distance">—</strong></div>
+          <div><span class="detail-label">გადამზიდი</span><strong id="detail-equipment">—</strong></div>
+          <div><span class="detail-label">აღების თარიღი</span><strong id="detail-pickup">—</strong></div>
+          <div><span class="detail-label">სტატუსი</span><strong id="detail-status-text">—</strong></div>
+          <div><span class="detail-label">მიბმულია</span><strong id="detail-assigned">—</strong></div>
+        </div>
+      </section>
+
+      <section class="stack" aria-label="ტვირთის მანქანები">
+        <h2>ტვირთის მანქანები</h2>
+        <ul class="load-list" id="detail-vehicles"></ul>
+      </section>
+
+      <div class="card__foot stack">
+        <button class="btn btn--primary btn--small" id="take-order" type="button">ორდერის აღება</button>
+        <button class="btn btn--small" id="deliver-order" type="button">ჩაბარება</button>
+        <button class="btn btn--danger btn--small" id="delete-order" type="button">წაშლა</button>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">Dispatch Hub · ვებ ინჟინერია 2026</footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatch Hub — ჩემი ორდერები</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="myorders">
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <img src="assets/logo.svg" alt="Dispatch Hub-ის ლოგო">
+      <span>DISPATCH&nbsp;HUB</span>
+    </div>
+    <nav class="topbar__nav" aria-label="მთავარი ნავიგაცია">
+      <a href="dashboard.html">ორდერები</a>
+      <a href="my-orders.html">ჩემი ორდერები</a>
+    </nav>
+    <div class="topbar__spacer"></div>
+    <span class="topbar__user">
+      <span id="user-name">—</span>
+      <span class="role-badge" id="role-badge">—</span>
+    </span>
+    <button class="btn btn--small" id="logout" type="button">გასვლა</button>
+  </header>
+
+  <main class="page">
+    <div class="page__title">
+      <h1>ჩემი ორდერები</h1>
+      <span>შენ მიერ აღებული და ჩაბარებული ტვირთები</span>
+    </div>
+    <section class="fleet" id="orders" aria-label="ჩემი ორდერების სია"></section>
+  </main>
+
+  <footer class="footer">Dispatch Hub · ვებ ინჟინერია 2026</footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
