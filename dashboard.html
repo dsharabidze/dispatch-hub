@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispatch Hub — ორდერები</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="board">
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <img src="assets/logo.svg" alt="Dispatch Hub-ის ლოგო">
+      <span>DISPATCH&nbsp;HUB</span>
+    </div>
+    <nav class="topbar__nav" aria-label="მთავარი ნავიგაცია">
+      <a href="dashboard.html">ორდერები</a>
+      <a href="my-orders.html">ჩემი ორდერები</a>
+    </nav>
+    <div class="topbar__spacer"></div>
+    <span class="topbar__user">
+      <span id="user-name">—</span>
+      <span class="role-badge" id="role-badge">—</span>
+    </span>
+    <button class="btn btn--small" id="logout" type="button">გასვლა</button>
+  </header>
+
+  <main class="page">
+    <div class="page__title">
+      <h1>ორდერების დაფა</h1>
+      <span>ხელმისაწვდომი ტვირთები — აშშ</span>
+    </div>
+
+    <!-- სტატისტიკა (CSS Grid) -->
+    <section class="stats" id="stats" aria-label="ორდერების სტატისტიკა">
+      <div class="stat"><div class="stat__num" data-stat="total">0</div><div class="stat__label">სულ ორდერი</div></div>
+      <div class="stat stat--available"><div class="stat__num" data-stat="available">0</div><div class="stat__label">ხელმისაწვდომი</div></div>
+      <div class="stat stat--trip"><div class="stat__num" data-stat="taken">0</div><div class="stat__label">აღებული</div></div>
+      <div class="stat stat--maintenance"><div class="stat__num" data-stat="delivered">0</div><div class="stat__label">ჩაბარებული</div></div>
+    </section>
+
+    <!-- ახალი ორდერის შექმნა (მხოლოდ ადმინი) -->
+    <section class="panel" id="create-panel" aria-labelledby="create-heading">
+      <h2 id="create-heading">ახალი ორდერის შექმნა</h2>
+      <p class="card__meta">ეს სექცია მხოლოდ ადმინისთვის ჩანს.</p>
+      <div id="api-status"></div>
+
+      <form id="create-form" novalidate>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="o-origin">საიდან</label>
+            <select class="field" id="o-origin" name="origin" required></select>
+          </div>
+          <div class="form-row">
+            <label for="o-dest">სად</label>
+            <select class="field" id="o-dest" name="dest" required></select>
+          </div>
+          <div class="form-row">
+            <label for="o-equipment">გადამზიდის ტიპი</label>
+            <select class="field" id="o-equipment" name="equipment" required>
+              <option value="Open">ღია (Open)</option>
+              <option value="Enclosed">დახურული (Enclosed)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="o-pickup">აღების თარიღი</label>
+            <input class="field" type="date" id="o-pickup" name="pickup" required>
+          </div>
+          <div class="form-row">
+            <label for="o-rate">ფასი ($)</label>
+            <input class="field" type="number" id="o-rate" name="rate" required min="1" placeholder="850">
+          </div>
+          <div class="form-row">
+            <label>სავარაუდო მანძილი</label>
+            <output class="field field--readonly" id="o-distance">—</output>
+          </div>
+        </div>
+
+        <!-- ტვირთის მანქანები -->
+        <fieldset class="load-builder">
+          <legend>ტვირთის მანქანები (NHTSA API)</legend>
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="o-make">მარკა</label>
+              <select class="field" id="o-make"><option value="">— იტვირთება —</option></select>
+            </div>
+            <div class="form-row">
+              <label for="o-model">მოდელი</label>
+              <select class="field" id="o-model"><option value="">— ჯერ მარკა —</option></select>
+            </div>
+            <div class="form-row">
+              <label for="o-year">წელი</label>
+              <input class="field" type="number" id="o-year" min="1990" max="2026" placeholder="2022">
+            </div>
+            <div class="form-row form-row--end">
+              <button class="btn btn--small" type="button" id="add-vehicle">+ მანქანის დამატება</button>
+            </div>
+          </div>
+          <ul class="load-list" id="load-list" aria-label="დამატებული მანქანები"></ul>
+        </fieldset>
+
+        <p class="form-error" id="create-error" role="alert"></p>
+        <button class="btn btn--primary" type="submit">ორდერის შექმნა</button>
+      </form>
+    </section>
+
+    <!-- ხელსაწყოების ზოლი -->
+    <div class="toolbar">
+      <input class="field toolbar__search" type="search" id="search"
+             placeholder="ძიება მარშრუტით ან ტიპით… (Esc — გასუფთავება)"
+             aria-label="ორდერების ძიება">
+      <select class="field field--narrow" id="status-filter" aria-label="სტატუსის ფილტრი">
+        <option value="all">ყველა სტატუსი</option>
+        <option value="available">ხელმისაწვდომი</option>
+        <option value="taken">აღებული</option>
+        <option value="delivered">ჩაბარებული</option>
+      </select>
+    </div>
+
+    <!-- ორდერების გრიდი -->
+    <section class="fleet" id="orders" aria-label="ორდერების სია"></section>
+  </main>
+
+  <footer class="footer">Dispatch Hub · ვებ ინჟინერია 2026</footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
