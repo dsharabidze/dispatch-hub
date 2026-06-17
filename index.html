@@ -3,49 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>პროექტის სახელი</title>
+  <title>Dispatch Hub — შესვლა</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
-  <header>
-    <nav>
-      <span class="nav__logo">პროექტის სახელი</span>
-      <div class="nav__links">
-        <a href="index.html">ძიება</a>
-        <a href="saved.html">შენახული</a>
+<body data-page="login">
+  <main class="login-wrap">
+    <section class="login-card" aria-labelledby="login-heading">
+      <div class="login-card__brand">
+        <img src="assets/logo.svg" alt="Dispatch Hub-ის ლოგო">
+        <span>DISPATCH&nbsp;HUB</span>
       </div>
-      <div class="nav__actions">
-        <span id="nav-user"></span>
-        <button id="logout-btn" type="button">გასვლა</button>
-      </div>
-    </nav>
-  </header>
 
-  <main>
+      <h1 id="login-heading">დისპეჩერის შესვლა</h1>
+      <p class="card__meta">სისტემა მხოლოდ ავტორიზებული დისპეჩერებისთვისაა.</p>
 
-    <!-- საძიებო / ფილტრის ფორმა -->
-    <section>
-      <form id="search-form">
-        <!-- დაამატე input ველები აქ (სულ მცირე 3 განსხვავებული ტიპი) -->
-        <button type="submit">ძიება</button>
+      <form id="login-form" novalidate>
+        <div class="form-row">
+          <label for="username">მომხმარებელი</label>
+          <input class="field" type="text" id="username" name="username"
+                 required minlength="3" autocomplete="username"
+                 placeholder="მაგ. admin">
+        </div>
+
+        <div class="form-row">
+          <label for="password">პაროლი</label>
+          <input class="field" type="password" id="password" name="password"
+                 required minlength="6" autocomplete="current-password"
+                 placeholder="••••••">
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember">დამიმახსოვრე</label>
+        </div>
+
+        <p class="form-error" id="login-error" role="alert"></p>
+
+        <button class="btn btn--primary btn--block" type="submit">შესვლა</button>
       </form>
+
+      <div class="login-hint">
+        <strong>სატესტო მონაცემები:</strong><br>
+        ადმინი — <code>admin / admin123</code><br>
+        დისპეჩერი — <code>giorgi / disp123</code>
+      </div>
     </section>
-
-    <!-- ჩატვირთვის და შეცდომის მდგომარეობები -->
-    <p id="loading-msg" hidden>იტვირთება…</p>
-    <p id="error-msg" hidden></p>
-
-    <!-- დინამიურად შექმნილი ბარათები აქ განთავსდება -->
-    <section>
-      <div id="results-grid"></div>
-    </section>
-
   </main>
 
-  <footer>
-    <!-- footer-ის შიგთავსი -->
-  </footer>
+  <footer class="footer">Dispatch Hub · ვებ ინჟინერია 2026</footer>
 
   <script type="module" src="js/main.js"></script>
 </body>
