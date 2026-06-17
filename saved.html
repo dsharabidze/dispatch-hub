@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>შენახული — პროექტის სახელი</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <span class="nav__logo">პროექტის სახელი</span>
+      <div class="nav__links">
+        <a href="index.html">ძიება</a>
+        <a href="saved.html">შენახული</a>
+      </div>
+      <div class="nav__actions">
+        <span id="nav-user"></span>
+        <button id="logout-btn" type="button">გასვლა</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>შენახული ელემენტები</h2>
+      <p id="saved-empty" hidden>ჯერ არაფერია შენახული.</p>
+      <div id="saved-grid"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <!-- footer-ის შიგთავსი -->
+  </footer>
+
+  <script type="module" src="js/saved.js"></script>
+</body>
+</html>

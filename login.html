@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>შესვლა — პროექტის სახელი</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <main>
+
+    <form id="login-form">
+      <!-- input type="text" ვალიდაციის ატრიბუტებით -->
+      <label for="name-input">შენი სახელი</label>
+      <input id="name-input" type="text" name="name" required minlength="2" autocomplete="name">
+
+      <p id="login-error" hidden></p>
+
+      <button type="submit">დაწყება →</button>
+    </form>
+
+  </main>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

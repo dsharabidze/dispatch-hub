@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>პროექტის სახელი</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <span class="nav__logo">პროექტის სახელი</span>
+      <div class="nav__links">
+        <a href="index.html">ძიება</a>
+        <a href="saved.html">შენახული</a>
+      </div>
+      <div class="nav__actions">
+        <span id="nav-user"></span>
+        <button id="logout-btn" type="button">გასვლა</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- საძიებო / ფილტრის ფორმა -->
+    <section>
+      <form id="search-form">
+        <!-- დაამატე input ველები აქ (სულ მცირე 3 განსხვავებული ტიპი) -->
+        <button type="submit">ძიება</button>
+      </form>
+    </section>
+
+    <!-- ჩატვირთვის და შეცდომის მდგომარეობები -->
+    <p id="loading-msg" hidden>იტვირთება…</p>
+    <p id="error-msg" hidden></p>
+
+    <!-- დინამიურად შექმნილი ბარათები აქ განთავსდება -->
+    <section>
+      <div id="results-grid"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <!-- footer-ის შიგთავსი -->
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
