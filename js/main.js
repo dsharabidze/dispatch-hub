@@ -173,10 +173,13 @@ function setupCreateOrder(session, counter, refresh) {
   ui.fillSelect(destSel, cities, "— სად —");
 
   // მანძილის გადათვლა, როცა ორივე ქალაქი არჩეულია
-  function updateDistance() {
+function updateDistance() {
     if (originSel.value && destSel.value) {
       const d = store.distanceBetween(originSel.value, destSel.value);
       distanceOut.textContent = d ? `≈ ${d} mi` : "—";
+      if (d && !form.rate.value) {
+        form.rate.value = Math.round(d * 1.8);
+      }
     } else {
       distanceOut.textContent = "—";
     }
