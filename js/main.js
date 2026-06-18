@@ -163,6 +163,9 @@ function setupCreateOrder(session, counter, refresh) {
   const vehListEl = document.getElementById("load-list");
   const apiStatus = document.getElementById("api-status");
   const formError = document.getElementById("create-error");
+  const pickupEl = document.getElementById("o-pickup");
+  pickupEl.min = new Date().toISOString().slice(0, 10);
+
 
   // მიმდინარე ტვირთის მანქანები (ფორმის შიდა მდგომარეობა)
   let loadVehicles = [];
@@ -240,6 +243,10 @@ function updateDistance() {
     }
     if (origin === dest) {
       formError.textContent = "საწყისი და დანიშნულების ქალაქი ერთი ვერ იქნება.";
+      return;
+    }
+    if (form.pickup.value && form.pickup.value < pickupEl.min) {
+      formError.textContent = "აღების თარიღი წარსულში ვერ იქნება.";
       return;
     }
     if (loadVehicles.length === 0) {
