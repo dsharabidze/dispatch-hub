@@ -1,10 +1,10 @@
-/* =========================================================
+/* 
    Dispatch Hub — style.css
    ერთიანი დასახელების კონვენცია: BEM-ისებური
    block, block__element, block--modifier
-   ========================================================= */
+ */
 
-/* ---- 1. CSS Custom Properties (ცვლადები) ---------------- */
+/* 1. CSS Custom Properties (ცვლადები)  */
 :root {
   /* ფერები */
   --color-ink: #16202a;        /* ძირითადი ტექსტი */
@@ -15,11 +15,17 @@
   --color-accent: #2b59ff;     /* სასიგნალო ლურჯი */
   --color-accent-ink: #1c3fc4;
 
+
+
+  
   /* სტატუსის ფერები (დისპეჩერის ფარები) */
   --status-available: #1f9d55;
   --status-trip: #d98300;
   --status-maintenance: #6b7480;
   --color-danger: #d64545;
+
+
+
 
   /* დაშორებები */
   --space-xs: 6px;
@@ -36,7 +42,7 @@
   --shadow: 0 1px 3px rgba(22, 32, 42, 0.08), 0 6px 18px rgba(22, 32, 42, 0.06);
 }
 
-/* ---- 2. Base ------------------------------------------- */
+/*  2. Base  */
 * { box-sizing: border-box; }
 
 body {
@@ -63,7 +69,7 @@ a { color: var(--color-accent-ink); }
   white-space: nowrap; border: 0;
 }
 
-/* ---- 3. ღილაკები --------------------------------------- */
+/* 3. ღილაკები */
 .btn {
   font: inherit;
   font-weight: 600;
@@ -91,7 +97,7 @@ a { color: var(--color-accent-ink); }
 .btn--danger:hover { background: var(--color-danger); color: #fff; }
 .btn--small { padding: 6px 10px; font-size: .85rem; }
 
-/* ---- 4. ზედა ზოლი (Flexbox) ---------------------------- */
+/* 4. ზედა ზოლი (Flexbox) */
 .topbar {
   display: flex;                 /* FLEXBOX #1 */
   align-items: center;
@@ -121,6 +127,9 @@ a { color: var(--color-accent-ink); }
 }
 .topbar__nav a:hover { background: rgba(255,255,255,.1); color: #fff; }
 
+
+
+
 /* როლის ნიშანი */
 .role-badge {
   font-family: var(--font-mono);
@@ -134,12 +143,16 @@ a { color: var(--color-accent-ink); }
 .role-badge--admin { color: #ffd166; }
 .role-badge--dispatcher { color: #8ecae6; }
 
-/* ---- 5. გვერდის კარკასი -------------------------------- */
+/* 5. გვერდის კარკასი */
 .page { max-width: 1100px; margin: 0 auto; padding: var(--space-lg) var(--space-md); }
 .page__title { display: flex; align-items: baseline; gap: var(--space-sm); flex-wrap: wrap; }
 .page__title span { color: var(--color-muted); font-size: .95rem; }
 
-/* ---- 6. სტატისტიკის ზოლი (Grid) ------------------------ */
+
+
+
+
+/* 6. სტატისტიკის ზოლი (Grid) */
 .stats {
   display: grid;                                          /* GRID #1 */
   grid-template-columns: repeat(4, 1fr);
@@ -158,7 +171,13 @@ a { color: var(--color-accent-ink); }
 .stat--trip .stat__num { color: var(--status-trip); }
 .stat--maintenance .stat__num { color: var(--status-maintenance); }
 
-/* ---- 7. ხელსაწყოების ზოლი ------------------------------ */
+
+
+
+
+
+
+/* 7. ხელსაწყოების ზოლი */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -177,22 +196,35 @@ a { color: var(--color-accent-ink); }
 }
 .field:focus { border-color: var(--color-accent); outline: none; }
 
-/* ---- 8. მანქანების გრიდი (Grid) ------------------------ */
+
+
+
+
+/* 8. მანქანების გრიდი (Grid) */
 .fleet {
-  display: grid;                                          /* GRID #2 */
+  display: grid;                                         
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: var(--space-md);
 }
+
+
+
+
+
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: var(--space-md);
-  display: flex;                 /* FLEXBOX #2 */
+  display: flex;                
   flex-direction: column;
   gap: var(--space-sm);
 }
+
+
+
+
 .card__head { display: flex; align-items: center; gap: var(--space-sm); }
 .card__title { font-size: 1.05rem; }
 .card__plate {
@@ -207,6 +239,11 @@ a { color: var(--color-accent-ink); }
 .card__meta { color: var(--color-muted); font-size: .88rem; margin: 0; }
 .card__foot { display: flex; gap: var(--space-sm); margin-top: auto; }
 
+
+
+
+
+
 /* სტატუსის ფარი — signature ელემენტი */
 .status-dot {
   width: 12px; height: 12px;
@@ -218,7 +255,10 @@ a { color: var(--color-accent-ink); }
 .status-dot--maintenance { background: var(--status-maintenance); box-shadow: 0 0 0 4px rgba(107,116,128,.18); }
 .status-text { margin-left: auto; font-size: .8rem; color: var(--color-muted); }
 
-/* ---- 9. ფორმის პანელი ---------------------------------- */
+
+
+
+/* 9. ფორმის პანელი  */
 .panel {
   background: var(--color-surface);
   border: 1px solid var(--color-line);
@@ -226,8 +266,11 @@ a { color: var(--color-accent-ink); }
   padding: var(--space-md);
   margin-bottom: var(--space-lg);
 }
+
+
+
 .form-grid {
-  display: grid;                                          /* Grid ფორმისთვის */
+  display: grid;                                        
   grid-template-columns: 1fr 1fr;
   gap: var(--space-sm) var(--space-md);
 }
@@ -238,7 +281,7 @@ a { color: var(--color-accent-ink); }
 .radio-group label { font-weight: 400; display: flex; align-items: center; gap: 4px; }
 .form-error { color: var(--color-danger); font-size: .8rem; min-height: 1em; }
 
-/* ---- 10. მდგომარეობების შეტყობინებები ------------------ */
+/*  10. მდგომარეობების შეტყობინებები */
 .loader {
   display: flex;
   align-items: center;
@@ -272,7 +315,7 @@ a { color: var(--color-accent-ink); }
 }
 .empty img { width: 80px; opacity: .6; margin-bottom: var(--space-sm); }
 
-/* toast */
+
 .toast {
   position: fixed;
   bottom: 20px; left: 50%;
@@ -288,10 +331,10 @@ a { color: var(--color-accent-ink); }
 }
 .toast--show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ---- 11. Login გვერდი ---------------------------------- */
+/* 11. Login გვერდი  */
 .login-wrap {
   min-height: 100vh;
-  display: flex;                 /* Flexbox ცენტრირებისთვის */
+  display: flex;                 
   align-items: center;
   justify-content: center;
   padding: var(--space-md);
@@ -323,7 +366,7 @@ a { color: var(--color-accent-ink); }
 
 .checkbox-row { display: flex; align-items: center; gap: var(--space-xs); margin: var(--space-sm) 0; }
 
-/* ---- 12. footer ---------------------------------------- */
+/* 12. footer  */
 .footer {
   text-align: center;
   color: var(--color-muted);
@@ -331,13 +374,13 @@ a { color: var(--color-accent-ink); }
   padding: var(--space-lg);
 }
 
-/* ---- 12b. Utility კლასები (inline style-ის ნაცვლად) ---- */
+/*  Utility კლასები (inline style-ის ნაცვლად)*/
 .btn--block { width: 100%; }
 .field--narrow { max-width: 200px; }
 .stack { margin-top: var(--space-md); }
 .form-row--narrow { max-width: 260px; }
 
-/* ---- 12c. ორდერის სპეციფიკური სტილები ------------------ */
+/*  ორდერის სპეციფიკური სტილები  */
 
 /* სტატუსის ფარის ფერები ორდერებისთვის */
 .status-dot--taken { background: var(--status-trip); box-shadow: 0 0 0 4px rgba(217,131,0,.18); }
@@ -403,9 +446,7 @@ a { color: var(--color-accent-ink); }
 .detail-grid > div { display: flex; flex-direction: column; gap: 2px; }
 .detail-label { color: var(--color-muted); font-size: .8rem; }
 
-/* =========================================================
-   13. რესპონსიულობა — 2 breakpoint
-   ========================================================= */
+/*  13. რესპონსიულობა — 2 breakpoint */
 
 /* მობილური ≤ 600px */
 @media (max-width: 600px) {

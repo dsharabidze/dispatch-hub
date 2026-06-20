@@ -1,9 +1,10 @@
-/* =========================================================
+/* 
    ui.js — ხედის (View) ფენა
    DOM-ის დინამიური აგება და მომხმარებლის feedback.
-   ========================================================= */
+    */
 
 /* სტატუსის ქართული წარწერა */
+
 export function statusLabel(status) {
   const map = {
     available: "ხელმისაწვდომი",
@@ -14,6 +15,7 @@ export function statusLabel(status) {
 }
 
 /* helper — ელემენტს ქმნის ატრიბუტებითა და ტექსტით */
+
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -22,15 +24,18 @@ function el(tag, className, text) {
 }
 
 /* $-ის ფორმატი */
+
 export function money(n) {
   return "$" + Number(n).toLocaleString("en-US");
 }
 
 /* ერთი ორდერის ბარათის აგება createElement-ით */
+
 export function createOrderCard(order, { onOpen }) {
   const card = el("article", "card");
 
   // სათაური: მარშრუტი + სტატუსის ფარი
+
   const head = el("div", "card__head");
   const dot = el("span", `status-dot status-dot--${order.status}`);
   const title = el("h3", "card__title", `${order.origin} → ${order.destination}`);
@@ -38,9 +43,11 @@ export function createOrderCard(order, { onOpen }) {
   head.append(dot, title, statusText);
 
   // ფასი (monospace, თვალში საცემი)
+
   const rate = el("span", "card__rate", money(order.rate));
 
   // მეტა-ინფო
+
   const meta = el("p", "card__meta",
     `${order.distance} mi · ${order.equipment === "Open" ? "ღია" : "დახურული"} · ${order.vehicles.length} მანქანა`);
 
@@ -49,10 +56,14 @@ export function createOrderCard(order, { onOpen }) {
   }
 
   // ფეხი — ღილაკი
+
+
   const foot = el("div", "card__foot");
   const openBtn = el("button", "btn btn--small", "დეტალები");
   openBtn.type = "button";
+
   // closure: handler "ახსოვს" კონკრეტული order.id
+
   openBtn.addEventListener("click", () => onOpen(order.id));
   foot.append(openBtn);
 
@@ -60,7 +71,11 @@ export function createOrderCard(order, { onOpen }) {
   return card;
 }
 
+
 /* ორდერების სიის დარენდერება */
+
+
+
 export function renderOrders(orders, container, opts) {
   container.innerHTML = "";
   if (orders.length === 0) {
@@ -72,7 +87,10 @@ export function renderOrders(orders, container, opts) {
   });
 }
 
+
+
 /* ცარიელი მდგომარეობა */
+
 export function renderEmpty(message) {
   const wrap = el("div", "empty");
   const img = document.createElement("img");
@@ -81,6 +99,9 @@ export function renderEmpty(message) {
   wrap.append(img, el("p", null, message));
   return wrap;
 }
+
+
+
 
 /* სტატისტიკის რიცხვების განახლება */
 export function renderStats(orders, root) {
@@ -91,7 +112,11 @@ export function renderStats(orders, root) {
   root.querySelector("[data-stat='delivered']").textContent = count("delivered");
 }
 
+
+
 /* მანქანების სიის რენდერი ორდერში (createElement) */
+
+
 export function renderVehicleList(vehicles, container) {
   container.innerHTML = "";
   vehicles.forEach((v) => {
@@ -102,6 +127,7 @@ export function renderVehicleList(vehicles, container) {
 }
 
 /* ჩატვირთვის ინდიკატორი */
+
 export function showLoading(container, message = "იტვირთება…") {
   container.innerHTML = "";
   const wrap = el("div", "loader");
@@ -116,6 +142,7 @@ export function showError(container, message) {
 }
 
 /* წამიერი toast */
+
 export function showToast(message) {
   let toast = document.querySelector(".toast");
   if (!toast) {
@@ -129,6 +156,7 @@ export function showToast(message) {
 }
 
 /* select-ის შევსება (createElement) */
+
 export function fillSelect(select, items, placeholder) {
   select.innerHTML = "";
   const ph = el("option", null, placeholder);

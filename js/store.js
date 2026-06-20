@@ -1,11 +1,12 @@
-/* =========================================================
+/* 
    store.js — მონაცემების ფენა (auto transport dispatch)
    პასუხისმგებელია: მომხმარებლები, სესია, ორდერები, ქალაქები.
    ყველაფერი localStorage-ში ინახება (backend არ გვაქვს).
-   ========================================================= */
+   */
 
 const SESSION_KEY = "dh_session";
 const ORDERS_KEY = "dh_orders";
+
 
 /* hardcoded მომხმარებლები — როლებით (admin / dispatcher) */
 const USERS = [
@@ -14,7 +15,14 @@ const USERS = [
   { username: "mariam", password: "disp123",  role: "dispatcher", name: "მარიამ კაპანაძე" },
 ];
 
+
+
+
+
+
 /* რეალური US ქალაქები კოორდინატებით — აქედან ვითვლით მანძილს */
+
+
 const CITIES = [
   { name: "Los Angeles",    state: "CA", lat: 34.05, lng: -118.24 },
   { name: "Phoenix",        state: "AZ", lat: 33.45, lng: -112.07 },
@@ -41,11 +49,18 @@ const CITIES = [
 const cityLabel = (c) => `${c.name}, ${c.state}`;
 
 // ქალაქების სია წარწერებად (select-ისთვის)
+
+
 export function getCityLabels() {
   return CITIES.map(cityLabel);
 }
 
+
+
 // haversine — დიდი წრის მანძილი მილებში ორ კოორდინატს შორის
+
+
+
 function haversineMiles(a, b) {
   const R = 3959; // დედამიწის რადიუსი მილებში
   const toRad = (d) => (d * Math.PI) / 180;
@@ -65,8 +80,13 @@ export function distanceBetween(originLabel, destLabel) {
   return Math.round(haversineMiles(a, b) * 1.2);
 }
 
+
+
 /* საწყისი ორდერები — array of objects (აპლიკაციის მდგომარეობა).
    თითო ორდერს აქვს vehicles მასივი (ბევრმანქანიანი ტვირთი). */
+
+
+
 function buildSeed() {
   const make = (origin, destination, rate, equipment, pickupDate, vehicles, status, takenBy) => ({
     origin, destination,
@@ -89,7 +109,7 @@ function buildSeed() {
   ];
 }
 
-/* ---- სესია / ავთენტიფიკაცია ---------------------------- */
+/* სესია / ავთენტიფიკაცია */
 
 export function login(username, password) {
   const user = USERS.find((u) => u.username === username && u.password === password);
@@ -117,7 +137,7 @@ export function requireAuth() {
   return session;
 }
 
-/* ---- ორდერების მდგომარეობა ----------------------------- */
+/* ორდერების მდგომარეობა  */
 
 export function getOrders() {
   const raw = localStorage.getItem(ORDERS_KEY);

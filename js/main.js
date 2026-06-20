@@ -1,15 +1,18 @@
-/* =========================================================
+/* 
    main.js — entry point (<script type="module">)
    ერთადერთი ფაილი, რომელსაც HTML პირდაპირ ტვირთავს.
    body[data-page]-ის მიხედვით ვმართავთ თითოეულ გვერდს.
-   ========================================================= */
+ */
 
 import * as store from "./store.js";
 import * as api from "./api.js";
 import * as ui from "./ui.js";
 
-/* ---- Closure #1: debounce ------------------------------
+/* Closure 1: debounce 
    timer ცვლადი "ცხოვრობს" დაბრუნებული ფუნქციის scope-ში. */
+
+
+
 function debounce(fn, delay = 300) {
   let timer;
   return function (...args) {
@@ -18,9 +21,11 @@ function debounce(fn, delay = 300) {
   };
 }
 
-/* ---- Closure #2: პრივატული დამთვლელი -------------------
+/* Closure 2: პრივატული დამთვლელი
    count გარედან მიუწვდომელია — მხოლოდ increment() ცვლის.
    ვითვლით, რამდენი ორდერი აიღო მომხმარებელმა ამ სესიაში. */
+
+
 function makeSessionCounter() {
   let count = 0;
   return {
@@ -38,9 +43,9 @@ function init() {
   if (page === "order") initOrder();
 }
 
-/* =========================================================
+/* 
    LOGIN
-   ========================================================= */
+  */
 function initLogin() {
   if (store.getSession()) {
     window.location.href = "dashboard.html";
@@ -48,6 +53,11 @@ function initLogin() {
   }
   const form = document.getElementById("login-form");
   const errorBox = document.getElementById("login-error");
+
+
+
+
+
 
   // EVENT: submit
   form.addEventListener("submit", (e) => {
@@ -66,6 +76,8 @@ function initLogin() {
   });
 }
 
+
+
 /* ზედა ზოლი — ყველა შიდა გვერდზე საერთო */
 function renderTopbar(session) {
   document.getElementById("user-name").textContent = session.name;
@@ -83,9 +95,7 @@ function renderTopbar(session) {
   }
 }
 
-/* =========================================================
-   BOARD (dashboard) — ხელმისაწვდომი ორდერები
-   ========================================================= */
+/* BOARD (dashboard) — ხელმისაწვდომი ორდერები */
 function initBoard() {
   const session = store.requireAuth();
   if (!session) return;
@@ -120,17 +130,23 @@ function initBoard() {
   }
 
   // EVENT: input — ძიება debounce-ით
+
+
   searchEl.addEventListener("input", debounce((e) => {
     query = e.target.value.trim();
     refresh();
   }, 300));
 
   // EVENT: keydown — Esc ასუფთავებს ძიებას
+
+
   searchEl.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { searchEl.value = ""; query = ""; refresh(); }
   });
 
   // EVENT: change — სტატუსის ფილტრი
+
+
   filterEl.addEventListener("change", (e) => {
     statusFilter = e.target.value;
     refresh();
@@ -140,9 +156,14 @@ function initBoard() {
   refresh();
 }
 
+
+
+
 /* ახალი ორდერის შექმნა — მხოლოდ ადმინისთვის (role gating).
    იყენებს: ქალაქების select, NHTSA API მანქანებისთვის,
    haversine მანძილისთვის. */
+
+
 function setupCreateOrder(session, counter, refresh) {
   const panel = document.getElementById("create-panel");
 
@@ -294,9 +315,11 @@ function initMyOrders() {
   refresh();
 }
 
-/* =========================================================
-   ORDER — დეტალის გვერდი
-   ========================================================= */
+
+
+/* ORDER — დეტალის გვერდი */
+
+
 function initOrder() {
   const session = store.requireAuth();
   if (!session) return;
